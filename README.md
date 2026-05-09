@@ -11,7 +11,7 @@
 - MVVM + Clean Architecture
 
 ## Запуск
-1. Клонуй репозиторій: `git clone https://github.com/твій_нік/ProductApp.git`
+1. Клонуй репозиторій: `git clone https://github.com/limonmoviegod/ProductApp`
 2. Відкрий проєкт в Android Studio
 3. Запусти на емуляторі або реальному пристрої
 4. Потрібне підключення до інтернету
