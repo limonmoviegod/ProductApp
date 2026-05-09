@@ -58,6 +58,7 @@ dependencies {
     implementation(libs.retrofit.moshi)
     implementation(libs.okhttp)
     implementation(libs.okhttp.logging)
+    implementation("androidx.navigation:navigation-compose:2.7.7")
     implementation(libs.moshi.kotlin)
     implementation(libs.paging.runtime)
     implementation(libs.paging.compose)
