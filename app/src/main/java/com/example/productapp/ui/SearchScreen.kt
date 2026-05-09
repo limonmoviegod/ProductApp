@@ -1,4 +1,4 @@
-package com.example.productapp.ui
+package com.example.productapp.presentation.ui
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -19,15 +19,17 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.paging.LoadState
 import androidx.paging.compose.collectAsLazyPagingItems
-import com.example.productapp.ui.components.ProductItem
-import com.example.productapp.ui.components.SearchBar
+import com.example.productapp.presentation.ui.components.ProductItem
+import com.example.productapp.presentation.ui.components.SearchBar
+import com.example.productapp.presentation.viewmodel.ProductViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun SearchScreen(
-    viewModel: ProductViewModel,
+    viewModel: ProductViewModel = hiltViewModel(),
     onBack: () -> Unit
 ) {
     val query by viewModel.query.collectAsState()

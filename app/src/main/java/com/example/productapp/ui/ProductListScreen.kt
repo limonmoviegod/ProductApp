@@ -1,4 +1,4 @@
-package com.example.productapp.ui
+package com.example.productapp.presentation.ui
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -24,14 +24,16 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.paging.LoadState
 import androidx.paging.compose.collectAsLazyPagingItems
-import com.example.productapp.ui.components.ProductItem
+import com.example.productapp.presentation.ui.components.ProductItem
+import com.example.productapp.presentation.viewmodel.ProductViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun ProductListScreen(
-    viewModel: ProductViewModel,
+    viewModel: ProductViewModel = hiltViewModel(),
     onSearchClick: () -> Unit
 ) {
     val products = viewModel.pagedProducts.collectAsLazyPagingItems()

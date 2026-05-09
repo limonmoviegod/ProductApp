@@ -3,6 +3,7 @@ plugins {
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.compose)
     alias(libs.plugins.ksp)
+    alias(libs.plugins.hilt.android)
 }
 
 android {
@@ -54,16 +55,19 @@ dependencies {
     implementation(libs.room.runtime)
     implementation(libs.room.ktx)
     implementation("androidx.lifecycle:lifecycle-viewmodel-compose:2.8.7")
+    implementation("androidx.navigation:navigation-compose:2.7.7")
     implementation(libs.retrofit)
     implementation(libs.retrofit.moshi)
     implementation(libs.okhttp)
     implementation(libs.okhttp.logging)
-    implementation("androidx.navigation:navigation-compose:2.7.7")
     implementation(libs.moshi.kotlin)
     implementation(libs.paging.runtime)
     implementation(libs.paging.compose)
     implementation(libs.coil.compose)
+    implementation(libs.hilt.android)
+    implementation(libs.hilt.navigation.compose)
     ksp(libs.room.compiler)
+    ksp(libs.hilt.compiler)
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)

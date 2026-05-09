@@ -2,15 +2,16 @@ package com.example.productapp.data.remote
 
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
-import com.example.productapp.data.local.ProductEntity
-import com.example.productapp.data.remote.dto.toEntity
+import com.example.productapp.data.remote.dto.toDomain
+import com.example.productapp.domain.model.Product
+import javax.inject.Inject
 
 class ProductsPagingSource(
     private val api: ApiService,
     private val query: String = ""
-) : PagingSource<Int, ProductEntity>() {
+) : PagingSource<Int, Product>() {
 
-    override suspend fun load(params: LoadParams<Int>): LoadResult<Int, ProductEntity> {
+    override suspend fun load(params: LoadParams<Int>): LoadResult<Int, Product> {
         return try {
             val skip = params.key ?: 0
             val response = if (query.isBlank()) {
@@ -18,7 +19,7 @@ class ProductsPagingSource(
             } else {
                 api.searchProducts(query = query, limit = params.loadSize, skip = skip)
             }
-            val data = response.products.map { it.toEntity() }
+            val data = response.products.map { it.toDomain() }
             LoadResult.Page(
                 data = data,
                 prevKey = if (skip == 0) null else skip - params.loadSize,
@@ -29,7 +30,7 @@ class ProductsPagingSource(
         }
     }
 
-    override fun getRefreshKey(state: PagingState<Int, ProductEntity>): Int? {
+    override fun getRefreshKey(state: PagingState<Int, Product>): Int? {
         return state.anchorPosition
     }
 }
