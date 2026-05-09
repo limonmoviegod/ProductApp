@@ -1,24 +1,19 @@
 package com.example.productapp.data.repository
 
-import com.example.productapp.data.local.ProductDao
+import androidx.paging.Pager
+import androidx.paging.PagingConfig
+import androidx.paging.PagingData
 import com.example.productapp.data.local.ProductEntity
+import com.example.productapp.data.remote.ApiService
+import com.example.productapp.data.remote.ProductsPagingSource
 import kotlinx.coroutines.flow.Flow
 
-class ProductRepository(private val dao: ProductDao) {
+class ProductRepository(private val api: ApiService) {
 
-    fun getProducts(): Flow<List<ProductEntity>> = dao.getAllProducts()
-
-    fun searchProducts(query: String): Flow<List<ProductEntity>> = dao.searchProducts(query)
-
-    suspend fun refreshCache() {
-        val newProducts = listOf(
-            ProductEntity(name = "Laptop", category = "Electronics", price = 1500.0),
-            ProductEntity(name = "Mouse", category = "Accessories", price = 25.0),
-            ProductEntity(name = "Keyboard", category = "Accessories", price = 50.0),
-            ProductEntity(name = "Monitor", category = "Electronics", price = 300.0),
-            ProductEntity(name = "Headphones", category = "Accessories", price = 80.0)
-        )
-        dao.clearAll()
-        dao.insertAll(newProducts)
+    fun getPagedProducts(query: String = ""): Flow<PagingData<ProductEntity>> {
+        return Pager(
+            config = PagingConfig(pageSize = 10, prefetchDistance = 2),
+            pagingSourceFactory = { ProductsPagingSource(api, query) }
+        ).flow
     }
 }
