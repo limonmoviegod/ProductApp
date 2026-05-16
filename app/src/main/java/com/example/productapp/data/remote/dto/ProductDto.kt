@@ -1,5 +1,6 @@
 package com.example.productapp.data.remote.dto
 
+import com.example.productapp.data.local.ProductEntity
 import com.example.productapp.domain.model.Product
 import com.squareup.moshi.JsonClass
 
@@ -23,6 +24,20 @@ data class ProductsResponse(
 fun ProductDto.toDomain() = Product(
     id = id,
     name = title,
+    price = price,
+    category = category
+)
+
+fun ProductDto.toEntity() = ProductEntity(
+    id = id,
+    name = title,
+    price = price,
+    category = category
+)
+
+fun ProductEntity.toDomain() = Product(
+    id = id,
+    name = name,
     price = price,
     category = category
 )
